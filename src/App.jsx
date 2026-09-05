@@ -38,8 +38,8 @@ const PERSONAL_INFO = {
   email: "rezwanul.rimel97@gmail.com",
   linkedin: "https://linkedin.com/in/rezwanulrimel",
   github: "https://github.com/rezwanulislamrimel",
-  cvLink: "#",
-  education: "B.Sc. in Computer Science & Engineering — AIICT , 2020",
+  cvLink: "./cv/rezwanul_rimel_cv.pdf",
+  education: "B.Sc. in Computer Science & Engineering — AIICT (National University), 2026",
 };
 
 const CERTIFICATIONS = [
