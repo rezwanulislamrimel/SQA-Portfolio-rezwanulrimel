@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Briefcase, Github, Linkedin, Mail, MessageCircle, ChevronDown, Award, GraduationCap, Building2, BookOpen } from "lucide-react";
+import { Briefcase, Github, Linkedin, Mail, MessageCircle, ChevronDown, Award, GraduationCap, Building2, BookOpen, Menu, X, Code2 } from "lucide-react";
 
 /* ═══════════════════════════════════════════
    DESIGN TOKENS — grounded in QA/test-report vernacular
@@ -79,8 +79,41 @@ const EXPERIENCES = [
     points: [
       "Run ICT courses for SSC, HSC/Inter, and Honors-level students.",
       "Teach hands-on Office Applications, Basic Computer Use, and Web Fundamentals.",
-      "Manage the academy's own web portal and run quality testing on it end to end.",
+      "Design, build, and maintain the academy's own web portal with React, then run quality testing on it end to end.",
     ],
+  },
+  {
+    role: "Frontend & Shopify / E-Commerce Developer",
+    company: "Freelance — Shopify & Local Web Clients",
+    location: "Dhaka, Bangladesh · Remote",
+    period: "2018 — 2023",
+    status: "past",
+    icon: "Code2",
+    points: [
+      "Built and customized Shopify storefronts and e-commerce sites for local and international clients — theming, product/checkout flows, and app integrations.",
+      "Delivered local frontend websites end-to-end: HTML5, CSS3, Flexbox/Grid, Tailwind, and Bootstrap for responsive, cross-browser layouts.",
+      "Wrote JavaScript (ES6) and DOM logic to wire up interactive UI, form validation, and API-driven data on client sites.",
+      "Built full-stack features with React.js, Node.js, Express.js, MongoDB, and Firebase — auth, data persistence, and deployment.",
+      "Used Git/GitHub for version control across every project, keeping a clean commit history and branch workflow.",
+      "This five-year hands-on build history is the technical foundation behind my move into SQA — I test software with a builder's understanding of how it's actually put together, not just how it's supposed to behave.",
+    ],
+    link: { label: "View work on Behance", url: "https://www.behance.net/rezwanulrimel" },
+  },
+  {
+    role: "Co-Founder",
+    company: "Rizzq (@Rizzqbd) — Islamic Lifestyle & Product Brand",
+    location: "Dhaka, Bangladesh · Online",
+    period: "Ongoing",
+    status: "active",
+    icon: "Briefcase",
+    points: [
+      "Founded and run Rizzq, an Islamic lifestyle & product brand, handling the business end-to-end from sourcing to sale.",
+      "Manage day-to-day online shop operations: product listings, order processing, and fulfillment.",
+      "Handle customer communication, inquiries, and after-sales support directly, building repeat trust with buyers.",
+      "Run the brand's e-commerce presence and marketing on Facebook, driving discovery and sales through the page.",
+      "This entrepreneurial, customer-facing experience complements my technical and SQA background — I understand the business impact of a bug or a broken checkout, not just the ticket.",
+    ],
+    link: { label: "Visit Rizzq on Facebook", url: "https://www.facebook.com/Rizzqbd" },
   },
 ];
 
@@ -109,6 +142,7 @@ const SKILL_CATEGORIES = [
   { category: "CI/CD & Tools", skills: ["GitHub Actions", "Jenkins", "Postman", "Newman", "Jira", "TestRail", "Git"] },
   { category: "Concepts", skills: ["SDLC", "STLC", "Agile Scrum", "Bug Life Cycle"] },
   { category: "Languages", skills: ["JavaScript", "TypeScript", "SQL"] },
+  { category: "Web Development", skills: ["HTML5 & CSS3", "Tailwind & Bootstrap", "JavaScript (ES6+)", "React & React Router", "Node.js & Express", "MongoDB", "Firebase Auth & JWT", "REST API Design"] },
 ];
 
 /* ═══════════════════════════════════════════
@@ -208,8 +242,10 @@ export default function Portfolio() {
   const [submitted, setSubmitted] = useState(false);
   const [openPost, setOpenPost] = useState(null);
   const [hireOpen, setHireOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const goto = (id) => {
+    setMobileNavOpen(false);
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -276,6 +312,22 @@ export default function Portfolio() {
           .grid-2 { grid-template-columns: 1fr !important; }
           .hero-grid { grid-template-columns: 1fr !important; }
         }
+        .menu-btn { display: none; }
+        .mobile-nav-panel { animation: fadeUp 0.2s ease both; }
+        @media (max-width: 720px) {
+          .nav-links { display: none !important; }
+          .menu-btn { display: flex !important; }
+          #home { padding: 48px 18px 40px !important; }
+          #experience, #projects, #skills, #blog { padding: 56px 18px !important; }
+          #contact { padding: 56px 18px !important; }
+          .float-photo { animation: none; }
+        }
+        @media (max-width: 600px) {
+          .contact-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 420px) {
+          .cta-primary { flex: 1 1 auto; justify-content: center; }
+        }
       `}</style>
 
       {/* ── HEADER ── */}
@@ -293,7 +345,7 @@ export default function Portfolio() {
               <span style={{ fontFamily: FONT_MONO, fontSize: 11.5, color: C.textFaint }}>online</span>
             </div>
           </div>
-          <nav style={{ display: "flex", gap: 22, alignItems: "center" }}>
+          <nav className="nav-links" style={{ display: "flex", gap: 22, alignItems: "center" }}>
             {NAV.map((n) => (
               <button key={n.id} className="nav-btn" onClick={() => goto(n.id)} style={{ border: 0, background: "transparent", color: C.textMuted, padding: 0, fontSize: 13.5, fontWeight: 500, cursor: "pointer" }}>
                 {n.label}
@@ -323,7 +375,36 @@ export default function Portfolio() {
               )}
             </div>
           </nav>
+
+          <button
+            className="menu-btn"
+            onClick={() => setMobileNavOpen(!mobileNavOpen)}
+            aria-label="Toggle menu"
+            style={{ display: "none", border: `1px solid ${C.border}`, background: "transparent", color: C.textMain, width: 38, height: 38, borderRadius: 8, cursor: "pointer", alignItems: "center", justifyContent: "center" }}
+          >
+            {mobileNavOpen ? <X size={19} /> : <Menu size={19} />}
+          </button>
         </div>
+
+        {mobileNavOpen && (
+          <div className="mobile-nav-panel" style={{ borderTop: `1px solid ${C.border}`, background: C.surface, padding: "8px 24px 18px" }}>
+            {NAV.map((n) => (
+              <button key={n.id} onClick={() => goto(n.id)} style={{ display: "block", width: "100%", textAlign: "left", border: 0, background: "transparent", color: C.textMuted, padding: "12px 0", fontSize: 14.5, fontWeight: 500, cursor: "pointer", borderBottom: `1px solid ${C.border}` }}>
+                {n.label}
+              </button>
+            ))}
+            <div style={{ display: "flex", gap: 10, marginTop: 14 }}>
+              <a href={`mailto:${PERSONAL_INFO.email}`} onClick={() => setMobileNavOpen(false)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, textDecoration: "none", background: C.pass, color: "#0B132B", padding: "11px 14px", borderRadius: 8, fontSize: 13.5, fontWeight: 700 }}>
+                <Mail size={15} />
+                Email
+              </a>
+              <a href={`https://wa.me/${PERSONAL_INFO.phone.replace(/[^0-9]/g, "")}`} target="_blank" rel="noreferrer" onClick={() => setMobileNavOpen(false)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, textDecoration: "none", border: `1px solid ${C.borderHi}`, color: C.textMain, padding: "11px 14px", borderRadius: 8, fontSize: 13.5, fontWeight: 700 }}>
+                <MessageCircle size={15} />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* ── HERO ── */}
@@ -339,7 +420,7 @@ export default function Portfolio() {
           </h1>
 
           <p className="fade-up fade-up-3" style={{ fontSize: 16, color: C.textMuted, lineHeight: 1.7, maxWidth: 500, marginBottom: 30 }}>
-            {PERSONAL_INFO.name} — {PERSONAL_INFO.title} in Dhaka. Manual and automated testing across web, mobile, and API layers, with Playwright, K6, and Postman doing the heavy lifting.
+            {PERSONAL_INFO.name} — {PERSONAL_INFO.title} in Dhaka. Manual and automated testing across web, mobile, and API layers, with Playwright, K6, and Postman doing the heavy lifting — and I build the websites I test, too, with React and the MERN stack.
           </p>
 
           <div className="fade-up fade-up-4" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
@@ -416,7 +497,7 @@ export default function Portfolio() {
               <span style={{ position: "absolute", left: -24, top: 6, width: 8, height: 8, borderRadius: "50%", background: C.pass, boxShadow: `0 0 0 3px ${C.bg}, 0 0 0 4px ${C.border}` }} />
               <div style={{ display: "flex", gap: 12, marginBottom: 10 }}>
                 <div style={{ width: 36, height: 36, borderRadius: 9, background: C.passDim, border: `1px solid ${C.pass}44`, display: "grid", placeItems: "center", flexShrink: 0, alignSelf: "flex-start", marginTop: 2 }}>
-                  {exp.icon === "Building2" ? <Building2 size={17} color={C.pass} /> : <BookOpen size={17} color={C.pass} />}
+                  {exp.icon === "Building2" ? <Building2 size={17} color={C.pass} /> : exp.icon === "Code2" ? <Code2 size={17} color={C.pass} /> : exp.icon === "Briefcase" ? <Briefcase size={17} color={C.pass} /> : <BookOpen size={17} color={C.pass} />}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "4px 12px" }}>
@@ -433,6 +514,16 @@ export default function Portfolio() {
                   </li>
                 ))}
               </ul>
+              {exp.link && (
+                <a
+                  href={exp.link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 12, textDecoration: "none", color: C.pass, fontSize: 12.5, fontWeight: 600, fontFamily: FONT_MONO }}
+                >
+                  {exp.link.label} →
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -592,7 +683,7 @@ export default function Portfolio() {
         <SectionTag>// contact.log</SectionTag>
         <h2 style={{ fontSize: "1.9rem", fontWeight: 800, marginBottom: 36 }}>Get in touch</h2>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 28 }}>
+        <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 28 }}>
           <div className="row-card" style={{ padding: 18, borderRadius: 8 }}>
             <div style={{ fontSize: 11.5, color: C.textFaint, marginBottom: 4 }}>Email</div>
             <a href={`mailto:${PERSONAL_INFO.email}`} style={{ color: C.pass, fontWeight: 600, fontSize: 13, textDecoration: "none" }}>{PERSONAL_INFO.email}</a>
@@ -632,7 +723,7 @@ export default function Portfolio() {
       </section>
 
       <footer style={{ padding: "28px 24px", borderTop: `1px solid ${C.border}`, textAlign: "center", fontSize: 12.5, color: C.textFaint }}>
-        {PERSONAL_INFO.name} — {PERSONAL_INFO.title} @ unidevGO · Founder, ICT Success Academy
+        {PERSONAL_INFO.name} — {PERSONAL_INFO.title} @ unidevGO · Web Developer · Founder, ICT Success Academy
       </footer>
     </div>
   );
