@@ -18,7 +18,7 @@
 
 <br/>
 
-**🌐 Live Site:** _[Add your deployed URL here]_
+**🌐 Live Site:** _[https://rezwanurimel.netlify.app/]_
 
 </div>
 
