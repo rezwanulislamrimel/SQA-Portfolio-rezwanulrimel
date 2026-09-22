@@ -210,6 +210,6 @@ Please do **not** reuse the personal content, name, copy, or branding as-is.
 
 <br/>
 
-`PASS` **All sections loaded** · `0 failures` · Built by **Rezwanul Rimel**
+`PASS` **All sections loaded** · `0 failures` · Built by **Rezwanul Rimel SQA Engineer**
 
 </div>
