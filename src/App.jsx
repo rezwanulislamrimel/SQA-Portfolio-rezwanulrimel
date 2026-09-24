@@ -39,7 +39,7 @@ const PERSONAL_INFO = {
   linkedin: "https://linkedin.com/in/rezwanulrimel",
   github: "https://github.com/rezwanulislamrimel",
   cvLink: "./cv/rezwanul_rimel_cv.pdf",
-  education: "B.Sc. in Computer Science & Engineering — AIICT (National University), 2026",
+  education: "B.Sc. in Computer Science & Engineering — AIICT , 2020",
 };
 
 const CERTIFICATIONS = [
@@ -143,6 +143,8 @@ const SKILL_CATEGORIES = [
   { category: "Concepts", skills: ["SDLC", "STLC", "Agile Scrum", "Bug Life Cycle"] },
   { category: "Languages", skills: ["JavaScript", "TypeScript", "SQL"] },
   { category: "Web Development", skills: ["HTML5 & CSS3", "Tailwind & Bootstrap", "JavaScript (ES6+)", "React & React Router", "Node.js & Express", "MongoDB", "Firebase Auth & JWT", "REST API Design"] },
+  { category: "🤖 AI Tools", skills: ["ChatGPT", "DeepSeek", "Gemini", "Claude", "Google AI Studio"], note: "Exploring and leveraging AI tools based on project requirements, QA workflows, and problem-solving needs." },
+  { category: "💻 AI Coding & Automation", skills: ["GitHub Copilot"], note: "AI-assisted coding, test automation, debugging, and development workflow support." },
 ];
 
 /* ═══════════════════════════════════════════
@@ -583,7 +585,10 @@ export default function Portfolio() {
           <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
             {SKILL_CATEGORIES.map((cat, i) => (
               <div key={i}>
-                <h4 style={{ fontSize: 13, fontWeight: 700, color: C.textMuted, marginBottom: 10 }}>{cat.category}</h4>
+                <h4 style={{ fontSize: 13, fontWeight: 700, color: C.textMuted, marginBottom: cat.note ? 4 : 10 }}>{cat.category}</h4>
+                {cat.note && (
+                  <p style={{ fontSize: 12, color: C.textFaint, lineHeight: 1.5, margin: "0 0 10px 0" }}>{cat.note}</p>
+                )}
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {cat.skills.map((skill, j) => (
                     <span key={j} style={{ fontSize: 12.5, background: C.surface, border: `1px solid ${C.border}`, padding: "6px 12px", borderRadius: 6, color: C.textMain }}>{skill}</span>
