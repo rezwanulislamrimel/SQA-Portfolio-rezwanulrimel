@@ -1,8 +1,10 @@
 import React from "react";
 import { C, FONT_SANS, FONT_HEAD } from "../constants/theme";
+import { SQABackground } from "../components/common";
 import { Navbar, Footer } from "../components/layout";
 import {
   HeroSection,
+  BugDefenseSection,
   ExperienceSection,
   ProjectsSection,
   SkillsSection,
@@ -17,7 +19,9 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ fontFamily: FONT_SANS, color: C.textMain, background: C.bg, minHeight: "100vh" }}>
+    <div style={{ fontFamily: FONT_SANS, color: C.textMain, background: C.bg, minHeight: "100vh", position: "relative" }}>
+      {/* SQA Animated Background */}
+      <SQABackground />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
         * { box-sizing: border-box; }
@@ -98,8 +102,9 @@ export default function HomePage() {
       <Navbar goto={goto} />
 
       {/* Main Content Sections */}
-      <main>
+      <main style={{ position: "relative", zIndex: 1 }}>
         <HeroSection />
+        <BugDefenseSection />
         <ExperienceSection />
         <ProjectsSection />
         <SkillsSection />

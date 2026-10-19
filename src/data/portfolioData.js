@@ -172,6 +172,7 @@ export const BLOG_POSTS = [
 
 export const NAV = [
   { id: "home", label: "Home" },
+  { id: "bug-defense", label: "QA Defense" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
