@@ -2,3 +2,4 @@ export { StatusDot } from "./StatusDot";
 export { SectionTag } from "./SectionTag";
 export { ClientBadge } from "./ClientBadge";
 export { SQABackground } from "./SQABackground";
+export { BlogReaderModal } from "./BlogReaderModal";
