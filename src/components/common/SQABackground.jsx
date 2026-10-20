@@ -454,21 +454,22 @@ export function SQABackground() {
           position: absolute;
           left: 0;
           right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, transparent 5%, rgba(0, 245, 212, 0.4) 30%, #00F5D4 50%, rgba(56, 189, 248, 0.4) 70%, transparent 95%);
-          box-shadow: 0 0 16px rgba(0, 245, 212, 0.5), 0 0 35px rgba(0, 245, 212, 0.25);
-          animation: sqaScannerSweep 14s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          height: 1.5px;
+          background: linear-gradient(90deg, transparent 5%, rgba(0, 245, 212, 0.2) 30%, rgba(0, 245, 212, 0.4) 50%, rgba(56, 189, 248, 0.2) 70%, transparent 95%);
+          box-shadow: 0 0 10px rgba(0, 245, 212, 0.25);
+          animation: sqaScannerSweep 16s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          opacity: 0.4;
         }
 
         .sqa-grid-backdrop {
           position: absolute;
           inset: 0;
           background-image: 
-            radial-gradient(circle, rgba(0, 245, 212, 0.08) 1px, transparent 1px),
-            linear-gradient(to right, rgba(244, 245, 247, 0.02) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(244, 245, 247, 0.02) 1px, transparent 1px);
+            radial-gradient(circle, rgba(0, 245, 212, 0.05) 1px, transparent 1px),
+            linear-gradient(to right, rgba(244, 245, 247, 0.015) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(244, 245, 247, 0.015) 1px, transparent 1px);
           background-size: 40px 40px, 80px 80px, 80px 80px;
-          opacity: 0.85;
+          opacity: 0.6;
         }
 
         .sqa-badge-drift {
@@ -477,14 +478,19 @@ export function SQABackground() {
           font-size: 11px;
           padding: 5px 10px;
           border-radius: 6px;
-          background: rgba(28, 37, 65, 0.6);
-          backdrop-filter: blur(4px);
-          border: 1px solid rgba(0, 245, 212, 0.18);
-          color: rgba(244, 245, 247, 0.45);
+          background: rgba(11, 19, 43, 0.85);
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(0, 245, 212, 0.15);
+          color: rgba(209, 213, 219, 0.6);
           display: flex;
           align-items: center;
           gap: 6px;
           user-select: none;
+          opacity: 0.6;
+        }
+
+        @media (max-width: 1280px) {
+          .sqa-badge-drift { display: none !important; }
         }
       `}</style>
 
@@ -500,9 +506,9 @@ export function SQABackground() {
           width: 500,
           height: 500,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0, 245, 212, 0.18) 0%, transparent 70%)",
-          filter: "blur(60px)",
-          animation: "ambientBreathe 12s ease-in-out infinite",
+          background: "radial-gradient(circle, rgba(0, 245, 212, 0.10) 0%, transparent 70%)",
+          filter: "blur(70px)",
+          animation: "ambientBreathe 14s ease-in-out infinite",
         }}
       />
       <div
@@ -513,16 +519,16 @@ export function SQABackground() {
           width: 600,
           height: 600,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, transparent 70%)",
-          filter: "blur(70px)",
-          animation: "ambientBreathe 15s ease-in-out infinite reverse",
+          background: "radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%)",
+          filter: "blur(80px)",
+          animation: "ambientBreathe 18s ease-in-out infinite reverse",
         }}
       />
 
       {/* Automated Quality Scan Beam */}
       <div className="sqa-scan-beam" />
 
-      {/* Interactive SQA Node Network Canvas */}
+      {/* Interactive SQA Node Network Canvas (Subtle & High Contrast) */}
       <canvas
         ref={canvasRef}
         style={{
@@ -531,15 +537,26 @@ export function SQABackground() {
           display: "block",
           width: "100%",
           height: "100%",
+          opacity: 0.32, // Soft, non-intrusive backdrop
         }}
       />
 
-      {/* Drifting SQA Telemetry Badges */}
+      {/* Central Vignette Contrast Shield — Ensures text has 100% crisp legibility */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse at 50% 35%, rgba(11, 19, 43, 0.5) 0%, rgba(11, 19, 43, 0.85) 65%, #0B132B 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Drifting SQA Telemetry Badges (Only on extra wide desktop) */}
       <div
         className="sqa-badge-drift"
         style={{
           top: "16%",
-          left: "4%",
+          left: "3%",
           animation: "floatSlow1 7s ease-in-out infinite",
           borderColor: "rgba(0, 245, 212, 0.25)",
         }}
@@ -552,7 +569,7 @@ export function SQABackground() {
         className="sqa-badge-drift"
         style={{
           top: "40%",
-          right: "4%",
+          right: "3%",
           animation: "floatSlow2 9s ease-in-out infinite",
           borderColor: "rgba(56, 189, 248, 0.25)",
         }}
@@ -565,7 +582,7 @@ export function SQABackground() {
         className="sqa-badge-drift"
         style={{
           bottom: "22%",
-          right: "8%",
+          right: "4%",
           animation: "floatSlow3 8s ease-in-out infinite",
           borderColor: "rgba(0, 245, 212, 0.2)",
         }}
@@ -578,7 +595,7 @@ export function SQABackground() {
         className="sqa-badge-drift"
         style={{
           bottom: "12%",
-          left: "6%",
+          left: "4%",
           animation: "floatSlow1 10s ease-in-out infinite",
           borderColor: "rgba(56, 189, 248, 0.2)",
         }}

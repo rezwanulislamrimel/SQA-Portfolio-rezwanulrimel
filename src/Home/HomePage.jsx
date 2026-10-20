@@ -23,9 +23,26 @@ export default function HomePage() {
       {/* SQA Animated Background */}
       <SQABackground />
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
-        * { box-sizing: border-box; }
-        h1, h2, h3, h4 { font-family: ${FONT_HEAD}; letter-spacing: -0.01em; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        * {
+          box-sizing: border-box;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+        }
+        body {
+          color: ${C.textMain};
+        }
+        h1, h2, h3, h4 {
+          font-family: ${FONT_HEAD};
+          letter-spacing: -0.015em;
+          color: #FFFFFF;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+        }
+        p {
+          color: ${C.textMuted};
+          line-height: 1.7;
+        }
         a { color: inherit; }
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -45,11 +62,18 @@ export default function HomePage() {
         .row-card, .nav-btn, .cta-primary, .avatar-ring { will-change: transform; }
         .row-card {
           background: ${C.surface};
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
           border: 1px solid ${C.border};
           border-left: 3px solid transparent;
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
           transition: border-color .18s ease, background .18s ease;
         }
-        .row-card:hover { border-color: ${C.borderHi}; background: ${C.surfaceAlt}; }
+        .row-card:hover {
+          border-color: ${C.borderHi};
+          background: ${C.surfaceAlt};
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
         .status-strip-pass { border-left-color: ${C.pass}; }
         .nav-btn { transition: color .15s ease; }
         .nav-btn:hover { color: ${C.textMain} !important; }

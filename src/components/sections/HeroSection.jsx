@@ -50,6 +50,8 @@ export function HeroSection() {
               fontWeight: 800,
               letterSpacing: "-0.5px",
               marginBottom: 20,
+              color: "#FFFFFF",
+              textShadow: "0 3px 18px rgba(0, 0, 0, 0.65)",
             }}
           >
             I hunt down bugs before your users ever see them.
@@ -58,11 +60,13 @@ export function HeroSection() {
           <p
             className="fade-up fade-up-3"
             style={{
-              fontSize: 16,
-              color: C.textMuted,
-              lineHeight: 1.7,
-              maxWidth: 500,
-              marginBottom: 24,
+              fontSize: 16.5,
+              color: "#E2E8F0",
+              lineHeight: 1.75,
+              maxWidth: 520,
+              marginBottom: 26,
+              fontWeight: 450,
+              textShadow: "0 2px 10px rgba(0, 0, 0, 0.6)",
             }}
           >
             {PERSONAL_INFO.name} — {PERSONAL_INFO.title} in Dhaka. I protect digital products, e-commerce checkout flows, and web apps from costly downtime and edge-case defects with Playwright, Postman, and K6 automated test suites.
@@ -150,10 +154,13 @@ export function HeroSection() {
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               gap: 10,
-              background: "rgba(28, 37, 65, 0.4)",
+              background: "rgba(28, 37, 65, 0.85)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
               border: `1px solid ${C.border}`,
               borderRadius: 10,
               padding: 14,
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
             }}
           >
             {trustMetrics.map((item, idx) => {
@@ -165,8 +172,8 @@ export function HeroSection() {
                       width: 28,
                       height: 28,
                       borderRadius: 6,
-                      background: `${item.color}18`,
-                      border: `1px solid ${item.color}44`,
+                      background: `${item.color}22`,
+                      border: `1px solid ${item.color}55`,
                       display: "grid",
                       placeItems: "center",
                       flexShrink: 0,
@@ -176,8 +183,8 @@ export function HeroSection() {
                     <Icon size={14} color={item.color} />
                   </div>
                   <div>
-                    <div style={{ fontSize: 12.5, fontWeight: 700, color: C.textMain }}>{item.label}</div>
-                    <div style={{ fontSize: 11, color: C.textFaint, lineHeight: 1.3 }}>{item.desc}</div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF" }}>{item.label}</div>
+                    <div style={{ fontSize: 11.5, color: "#CBD5E1", lineHeight: 1.35 }}>{item.desc}</div>
                   </div>
                 </div>
               );
