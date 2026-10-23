@@ -1,27 +1,51 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Briefcase, ChevronDown, Mail, MessageCircle, Menu, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Briefcase, ChevronDown, Mail, MessageCircle, Menu, X, Languages } from "lucide-react";
 import { C, FONT_MONO } from "../../constants/theme";
 import { PROFILE_IMG } from "../../assets/profileImage";
 import { PERSONAL_INFO, NAV } from "../../data/portfolioData";
 import { StatusDot } from "../common/StatusDot";
 
-export function Navbar({ goto }) {
+export function Navbar({ goto, lang, setLang }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isBlogPage = location.pathname === "/blog";
+
   const [hireOpen, setHireOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const handleNavClick = (id) => {
     setMobileNavOpen(false);
+
     if (id === "blog") {
-      navigate("/blog");
+      if (isBlogPage) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/blog");
+      }
       return;
     }
+
+    // If on blog page and user clicks any homepage section
+    if (isBlogPage) {
+      navigate(`/#${id}`);
+      return;
+    }
+
+    // If on homepage
     if (goto) {
       goto(id);
     } else {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleBrandClick = () => {
+    if (isBlogPage) {
+      navigate("/");
+    } else {
+      handleNavClick("home");
     }
   };
 
@@ -31,14 +55,15 @@ export function Navbar({ goto }) {
         position: "sticky",
         top: 0,
         zIndex: 200,
-        background: "rgba(11,19,43,0.9)",
-        backdropFilter: "blur(10px)",
+        background: "rgba(11, 19, 43, 0.94)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
         borderBottom: `1px solid ${C.border}`,
       }}
     >
       <div
         style={{
-          maxWidth: 1100,
+          maxWidth: 1200,
           margin: "auto",
           padding: "0 24px",
           height: 64,
@@ -50,7 +75,8 @@ export function Navbar({ goto }) {
         {/* Brand / Profile Avatar */}
         <div
           style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
-          onClick={() => handleNavClick("home")}
+          onClick={handleBrandClick}
+          title={isBlogPage ? "Return to Portfolio" : "Scroll to Top"}
         >
           <img
             src={PROFILE_IMG}
@@ -74,25 +100,76 @@ export function Navbar({ goto }) {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="nav-links" style={{ display: "flex", gap: 22, alignItems: "center" }}>
-          {NAV.map((n) => (
-            <button
-              key={n.id}
-              className="nav-btn"
-              onClick={() => handleNavClick(n.id)}
+        <nav className="nav-links" style={{ display: "flex", gap: 20, alignItems: "center" }}>
+          {NAV.map((n) => {
+            const isBlogActive = isBlogPage && n.id === "blog";
+            return (
+              <button
+                key={n.id}
+                className="nav-btn"
+                onClick={() => handleNavClick(n.id)}
+                style={{
+                  border: 0,
+                  background: isBlogActive ? "rgba(0, 245, 212, 0.12)" : "transparent",
+                  color: isBlogActive ? C.pass : C.textMuted,
+                  padding: isBlogActive ? "6px 12px" : "4px 0",
+                  borderRadius: isBlogActive ? 6 : 0,
+                  borderBottom: isBlogActive ? `1px solid ${C.pass}55` : "none",
+                  fontSize: 13.5,
+                  fontWeight: isBlogActive ? 700 : 500,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  transition: "all 0.15s ease",
+                }}
+              >
+                {isBlogActive && <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.pass }} />}
+                {n.label}
+              </button>
+            );
+          })}
+
+          {/* Optional Language Switcher in Navbar */}
+          {setLang && (
+            <div
               style={{
-                border: 0,
-                background: "transparent",
-                color: C.textMuted,
-                padding: 0,
-                fontSize: 13.5,
-                fontWeight: 500,
-                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                background: "rgba(28, 37, 65, 0.8)",
+                border: `1px solid ${C.border}`,
+                borderRadius: 8,
+                padding: "2px 4px",
+                marginLeft: 4,
               }}
             >
-              {n.label}
-            </button>
-          ))}
+              {[
+                { key: "both", label: "🌐 Both" },
+                { key: "en", label: "🇬🇧 EN" },
+                { key: "bn", label: "🇧🇩 বাংলা" },
+              ].map((l) => (
+                <button
+                  key={l.key}
+                  onClick={() => setLang(l.key)}
+                  style={{
+                    background: lang === l.key ? C.pass : "transparent",
+                    color: lang === l.key ? "#0B132B" : C.textMuted,
+                    border: 0,
+                    borderRadius: 5,
+                    padding: "4px 7px",
+                    fontSize: 11,
+                    fontFamily: FONT_MONO,
+                    cursor: "pointer",
+                    fontWeight: lang === l.key ? 700 : 500,
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Hire Me Dropdown */}
           <div style={{ position: "relative" }}>
@@ -214,27 +291,65 @@ export function Navbar({ goto }) {
             padding: "8px 24px 18px",
           }}
         >
-          {NAV.map((n) => (
-            <button
-              key={n.id}
-              onClick={() => handleNavClick(n.id)}
-              style={{
-                display: "block",
-                width: "100%",
-                textAlign: "left",
-                border: 0,
-                background: "transparent",
-                color: C.textMuted,
-                padding: "12px 0",
-                fontSize: 14.5,
-                fontWeight: 500,
-                cursor: "pointer",
-                borderBottom: `1px solid ${C.border}`,
-              }}
-            >
-              {n.label}
-            </button>
-          ))}
+          {NAV.map((n) => {
+            const isBlogActive = isBlogPage && n.id === "blog";
+            return (
+              <button
+                key={n.id}
+                onClick={() => handleNavClick(n.id)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  textAlign: "left",
+                  border: 0,
+                  background: "transparent",
+                  color: isBlogActive ? C.pass : C.textMuted,
+                  padding: "12px 0",
+                  fontSize: 14.5,
+                  fontWeight: isBlogActive ? 700 : 500,
+                  cursor: "pointer",
+                  borderBottom: `1px solid ${C.border}`,
+                }}
+              >
+                <span>{n.label}</span>
+                {isBlogActive && <span style={{ fontFamily: FONT_MONO, fontSize: 11, color: C.pass }}>● Active</span>}
+              </button>
+            );
+          })}
+
+          {/* Language Toggle in Mobile Drawer */}
+          {setLang && (
+            <div style={{ display: "flex", gap: 6, marginTop: 14, marginBottom: 8, alignItems: "center" }}>
+              <span style={{ fontSize: 12, color: C.textFaint, fontFamily: FONT_MONO }}>Language:</span>
+              {[
+                { key: "both", label: "🌐 Both" },
+                { key: "en", label: "🇬🇧 EN" },
+                { key: "bn", label: "🇧🇩 বাংলা" },
+              ].map((l) => (
+                <button
+                  key={l.key}
+                  onClick={() => setLang(l.key)}
+                  style={{
+                    flex: 1,
+                    background: lang === l.key ? C.pass : "rgba(28, 37, 65, 0.9)",
+                    color: lang === l.key ? "#0B132B" : C.textMuted,
+                    border: `1px solid ${lang === l.key ? C.pass : C.border}`,
+                    borderRadius: 6,
+                    padding: "7px 6px",
+                    fontSize: 12,
+                    fontFamily: FONT_MONO,
+                    cursor: "pointer",
+                    fontWeight: lang === l.key ? 700 : 500,
+                  }}
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          )}
+
           <div style={{ display: "flex", gap: 10, marginTop: 14 }}>
             <a
               href={`mailto:${PERSONAL_INFO.email}`}

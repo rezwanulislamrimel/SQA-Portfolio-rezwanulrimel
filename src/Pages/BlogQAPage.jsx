@@ -28,6 +28,7 @@ import { ALL_INTERVIEW_QUESTIONS, INTERVIEW_CATEGORIES } from "../data/interview
 import { PERSONAL_INFO } from "../data/portfolioData";
 import { BlogReaderModal } from "../components/common/BlogReaderModal";
 import { SQABackground } from "../components/common/SQABackground";
+import { Navbar } from "../components/layout/Navbar";
 
 /* ─── Interview Q&A Accordion Card ────────────────────────────── */
 function InterviewCard({ q, lang, idx }) {
@@ -316,104 +317,8 @@ export default function BlogQAPage() {
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
 
-      {/* ─── Sticky Navbar ──────────────────────────────────── */}
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 200,
-          background: "rgba(11, 19, 43, 0.92)",
-          backdropFilter: "blur(12px)",
-          borderBottom: `1px solid ${C.border}`,
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "0 24px",
-            height: 64,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              color: C.pass,
-              textDecoration: "none",
-              fontSize: 13.5,
-              fontWeight: 700,
-              fontFamily: FONT_MONO,
-            }}
-          >
-            <ArrowLeft size={16} /> Back to Portfolio
-          </Link>
-
-          {/* Center: Global Language Switcher */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 4,
-              background: "rgba(28, 37, 65, 0.8)",
-              border: `1px solid ${C.border}`,
-              borderRadius: 8,
-              padding: "3px 4px",
-            }}
-          >
-            <span style={{ display: "flex", alignItems: "center", gap: 5, padding: "0 6px", fontSize: 11, fontFamily: FONT_MONO, color: C.textFaint }}>
-              <Languages size={12} color={C.pass} /> Lang:
-            </span>
-            {[
-              { key: "both", label: "🌐 Both" },
-              { key: "en", label: "🇬🇧 EN" },
-              { key: "bn", label: "🇧🇩 বাংলা" },
-            ].map((l) => (
-              <button
-                key={l.key}
-                onClick={() => setLang(l.key)}
-                style={{
-                  background: lang === l.key ? C.pass : "transparent",
-                  color: lang === l.key ? "#0B132B" : C.textMuted,
-                  border: 0,
-                  borderRadius: 6,
-                  padding: "4px 8px",
-                  fontSize: 11,
-                  fontFamily: FONT_MONO,
-                  cursor: "pointer",
-                  fontWeight: lang === l.key ? 700 : 500,
-                }}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <a
-              href={PERSONAL_INFO.github}
-              target="_blank"
-              rel="noreferrer"
-              style={{ color: C.textMuted, display: "flex", alignItems: "center", gap: 6, textDecoration: "none", fontSize: 13 }}
-            >
-              <Github size={16} /> GitHub
-            </a>
-            <a
-              href={PERSONAL_INFO.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              style={{ color: C.info, display: "flex", alignItems: "center", gap: 6, textDecoration: "none", fontSize: 13, fontWeight: 600 }}
-            >
-              <Linkedin size={16} /> LinkedIn
-            </a>
-          </div>
-        </div>
-      </header>
+      {/* ─── Unified Portfolio Navbar ──────────────────────── */}
+      <Navbar lang={lang} setLang={setLang} />
 
       {/* ─── Main Content ───────────────────────────────────── */}
       <main style={{ position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "40px 24px 80px" }}>

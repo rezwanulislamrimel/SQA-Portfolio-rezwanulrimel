@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { C, FONT_SANS, FONT_HEAD } from "../constants/theme";
 import { SQABackground } from "../components/common";
 import { Navbar, Footer } from "../components/layout";
@@ -13,10 +14,22 @@ import {
 } from "../components/sections";
 
 export default function HomePage() {
+  const location = useLocation();
+
   const goto = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  useEffect(() => {
+    const hash = window.location.hash?.replace("#", "");
+    if (hash) {
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+    }
+  }, [location]);
 
   return (
     <div style={{ fontFamily: FONT_SANS, color: C.textMain, background: C.bg, minHeight: "100vh", position: "relative" }}>
