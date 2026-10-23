@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Briefcase, ChevronDown, Mail, MessageCircle, Menu, X } from "lucide-react";
 import { C, FONT_MONO } from "../../constants/theme";
 import { PROFILE_IMG } from "../../assets/profileImage";
@@ -6,11 +7,16 @@ import { PERSONAL_INFO, NAV } from "../../data/portfolioData";
 import { StatusDot } from "../common/StatusDot";
 
 export function Navbar({ goto }) {
+  const navigate = useNavigate();
   const [hireOpen, setHireOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const handleNavClick = (id) => {
     setMobileNavOpen(false);
+    if (id === "blog") {
+      navigate("/blog");
+      return;
+    }
     if (goto) {
       goto(id);
     } else {

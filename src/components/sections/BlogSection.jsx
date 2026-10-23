@@ -35,10 +35,10 @@ export function BlogSection() {
         <div>
           <SectionTag>// blog.articles</SectionTag>
           <h2 style={{ fontSize: "clamp(1.9rem, 3.2vw, 2.5rem)", fontWeight: 800, margin: "0 0 10px 0", color: "#FFFFFF" }}>
-            Software Quality & Automation Insights
+            SQA Knowledge Base & Interview Prep
           </h2>
           <p style={{ fontSize: 15, color: C.textMuted, maxWidth: 580, margin: 0, lineHeight: 1.6 }}>
-            Practical write-ups on Playwright automation frameworks, Postman API testing in CI/CD, K6 stress testing, and zero-defect QA methodologies.
+            Bilingual articles on Playwright, Postman, K6, SDLC, Bug Lifecycle, and 40+ interview Q&A in English & বাংলা.
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export function BlogSection() {
             transition: "all 0.15s ease",
           }}
         >
-          View Full Knowledge Base ({ALL_BLOG_POSTS.length} Articles) <ArrowRight size={15} />
+          View All Articles & Interview Q&A <ArrowRight size={15} />
         </Link>
       </div>
 
