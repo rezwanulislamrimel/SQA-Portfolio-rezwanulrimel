@@ -43,13 +43,17 @@ export const EXPERIENCES = [
     role: "Founder & Lead ICT Instructor",
     company: "ICT Success Academy",
     location: "Dhaka, Bangladesh",
-    period: "Ongoing",
+    period: "2025 — Present",
     status: "active",
     icon: "BookOpen",
     points: [
       "Run ICT courses for SSC, HSC/Inter, and Honors-level students.",
       "Teach hands-on Office Applications, Basic Computer Use, and Web Fundamentals.",
       "Design, build, and maintain the academy's own web portal with React, then run quality testing on it end to end.",
+    ],
+    links: [
+      { label: "Facebook Page", url: "https://www.facebook.com/ICTSuccessAcademy" },
+      { label: "Visit Website", url: "https://ict-successacademy.netlify.app/" },
     ],
   },
   {
@@ -73,7 +77,7 @@ export const EXPERIENCES = [
     role: "Co-Founder",
     company: "Rizzq (@Rizzqbd) — Islamic Lifestyle & Product Brand",
     location: "Dhaka, Bangladesh · Online",
-    period: "Ongoing",
+    period: "2020 — Present",
     status: "active",
     icon: "Briefcase",
     points: [
