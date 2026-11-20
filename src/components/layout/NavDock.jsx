@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Home, Shield, Layers, Briefcase, FolderGit2, Code2, BookOpen, Mail } from "lucide-react";
+import { Home, Layers, Sparkles, Briefcase, Award, FolderGit2, Code2, MessageSquare, Mail } from "lucide-react";
 import { C } from "../../constants/theme";
 
 const sections = [
   { id: "home", icon: Home, label: "Home" },
-  { id: "bug-defense", icon: Shield, label: "QA Defense" },
+  { id: "why-hire", icon: Sparkles, label: "Why Me" },
   { id: "services", icon: Layers, label: "Services" },
   { id: "experience", icon: Briefcase, label: "Experience" },
+  { id: "certifications", icon: Award, label: "Certs" },
   { id: "projects", icon: FolderGit2, label: "Projects" },
   { id: "skills", icon: Code2, label: "Skills" },
-  { id: "blog", icon: BookOpen, label: "Blog" },
+  { id: "testimonials", icon: MessageSquare, label: "Reviews" },
   { id: "contact", icon: Mail, label: "Contact" },
 ];
 

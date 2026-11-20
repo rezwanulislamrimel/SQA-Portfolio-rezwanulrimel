@@ -8,12 +8,14 @@ import { SQABackground } from "../components/common";
 import { ProfileSidebar, NavDock } from "../components/layout";
 import {
   HeroSection,
-  BugDefenseSection,
+  StatsSection,
+  WhyHireMeSection,
   ServicesSection,
   ExperienceSection,
+  CertificationsSection,
   ProjectsSection,
   SkillsSection,
-  BlogSection,
+  TestimonialsSection,
   ContactSection,
 } from "../components/sections";
 
@@ -168,7 +170,7 @@ export default function HomePage() {
           background: "rgba(5, 5, 5, 0.97)", backdropFilter: "blur(16px)",
           padding: "24px 20px", overflowY: "auto",
         }}>
-          {["home","bug-defense","experience","projects","skills","blog","contact"].map((id) => (
+          {["home","why-hire","services","experience","certifications","projects","skills","testimonials","contact"].map((id) => (
             <button key={id} onClick={() => {
               setMobileMenuOpen(false);
               setTimeout(() => {
@@ -201,12 +203,14 @@ export default function HomePage() {
       }}>
         <SQABackground />
         <HeroSection />
-        <BugDefenseSection />
+        <StatsSection />
+        <WhyHireMeSection />
         <ServicesSection />
         <ExperienceSection />
+        <CertificationsSection />
         <ProjectsSection />
         <SkillsSection />
-        <BlogSection />
+        <TestimonialsSection />
         <ContactSection />
       </main>
     </div>

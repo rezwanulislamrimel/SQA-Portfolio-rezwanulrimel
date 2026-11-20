@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Github,
   Linkedin,
@@ -10,6 +11,7 @@ import {
   Code2,
   ArrowUpRight,
   Briefcase,
+  FileText,
 } from "lucide-react";
 import { C, FONT_MONO, FONT_SANS, FONT_HEAD } from "../../constants/theme";
 import { PROFILE_IMG } from "../../assets/profileImage";
@@ -366,8 +368,33 @@ export function ProfileSidebar() {
         {/* ── Spacer ── */}
         <div style={{ flex: 1 }} />
 
-        {/* ── CTA Button — bottom ── */}
-        <div style={{ padding: "14px 14px 16px" }}>
+        {/* ── CTA Buttons — bottom ── */}
+        <div style={{ padding: "14px 14px 16px", display: "flex", flexDirection: "column", gap: 8 }}>
+          <Link
+            to="/resume"
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "12px 18px",
+              borderRadius: 12,
+              background: "transparent",
+              border: `1px solid ${C.accent}44`,
+              color: C.accent,
+              textDecoration: "none",
+              fontSize: 13,
+              fontWeight: 700,
+              fontFamily: FONT_SANS,
+              transition: "all 0.2s ease",
+            }}
+          >
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <FileText size={15} strokeWidth={2.5} />
+              View Resume
+            </span>
+            <ArrowUpRight size={14} strokeWidth={2.5} />
+          </Link>
           <a
             href={PERSONAL_INFO.cvLink}
             download

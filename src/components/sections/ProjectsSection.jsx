@@ -1,6 +1,6 @@
-import React from "react";
-import { Github, Star, GitFork, ExternalLink, Loader2, AlertTriangle } from "lucide-react";
-import { C, FONT_MONO } from "../../constants/theme";
+import React, { useState } from "react";
+import { Github, Star, GitFork, ExternalLink, Loader2, AlertTriangle, X, Target, Wrench, TrendingUp, ChevronRight } from "lucide-react";
+import { C, FONT_MONO, FONT_HEAD } from "../../constants/theme";
 import { PROJECTS, LOCAL_CLIENTS, PERSONAL_INFO } from "../../data/portfolioData";
 import { SectionTag } from "../common/SectionTag";
 import { StatusDot } from "../common/StatusDot";
@@ -262,6 +262,7 @@ function GitHubRepoCard({ repo }) {
 export function ProjectsSection() {
   const clientColors = [C.pass, C.warn, C.fail, C.info, C.pass];
   const { repos, loading, error } = useGitHubRepos(8);
+  const [caseStudy, setCaseStudy] = useState(null);
 
   return (
     <section
@@ -319,7 +320,7 @@ export function ProjectsSection() {
           <div
             key={i}
             className="row-card status-strip-pass"
-            style={{ borderRadius: 8, padding: 22 }}
+            style={{ borderRadius: 8, padding: 22, display: "flex", flexDirection: "column" }}
           >
             <div
               style={{
@@ -343,10 +344,10 @@ export function ProjectsSection() {
               </span>
             </div>
             <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{proj.title}</h3>
-            <p style={{ fontSize: 13.5, color: C.textMuted, lineHeight: 1.6, marginBottom: 16 }}>
+            <p style={{ fontSize: 13.5, color: C.textMuted, lineHeight: 1.6, marginBottom: 16, flex: 1 }}>
               {proj.desc}
             </p>
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: proj.caseStudy ? 14 : 0 }}>
               {proj.tech.map((t, j) => (
                 <span
                   key={j}
@@ -364,6 +365,29 @@ export function ProjectsSection() {
                 </span>
               ))}
             </div>
+            {proj.caseStudy && (
+              <button
+                onClick={() => setCaseStudy(proj)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  background: "transparent",
+                  border: 0,
+                  color: C.accent,
+                  fontSize: 12,
+                  fontWeight: 700,
+                  fontFamily: FONT_MONO,
+                  cursor: "pointer",
+                  padding: 0,
+                  transition: "gap 0.15s ease",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.gap = "10px"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.gap = "6px"; }}
+              >
+                View Case Study <ChevronRight size={13} />
+              </button>
+            )}
           </div>
         ))}
       </div>
@@ -496,6 +520,195 @@ export function ProjectsSection() {
           50% { opacity: 0.4; }
         }
       `}</style>
+
+      {/* ── Case Study Modal ── */}
+      {caseStudy && (
+        <>
+          <div
+            onClick={() => setCaseStudy(null)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.75)",
+              backdropFilter: "blur(6px)",
+              zIndex: 999,
+            }}
+          />
+          <div
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "min(560px, 92vw)",
+              maxHeight: "85vh",
+              overflowY: "auto",
+              background: C.surface,
+              border: `1px solid ${C.border}`,
+              borderRadius: 20,
+              zIndex: 1000,
+              animation: "fadeUp 0.25s cubic-bezier(.2,.7,.3,1) both",
+            }}
+          >
+            {/* Modal header */}
+            <div
+              style={{
+                padding: "22px 24px 18px",
+                borderBottom: `1px solid ${C.border}`,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+              }}
+            >
+              <div>
+                <span
+                  style={{
+                    fontFamily: FONT_MONO,
+                    fontSize: 10.5,
+                    color: C.accent,
+                    letterSpacing: "0.1em",
+                    display: "block",
+                    marginBottom: 6,
+                  }}
+                >
+                  📋 CASE STUDY
+                </span>
+                <h3
+                  style={{
+                    fontFamily: FONT_HEAD,
+                    fontSize: 18,
+                    fontWeight: 800,
+                    color: "#fff",
+                    margin: 0,
+                  }}
+                >
+                  {caseStudy.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setCaseStudy(null)}
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 8,
+                  border: `1px solid ${C.border}`,
+                  background: "transparent",
+                  color: C.textMuted,
+                  cursor: "pointer",
+                  display: "grid",
+                  placeItems: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Modal body */}
+            <div style={{ padding: "22px 24px 28px" }}>
+              {[
+                {
+                  icon: Target,
+                  label: "THE PROBLEM",
+                  color: "#ef4444",
+                  text: caseStudy.caseStudy.problem,
+                },
+                {
+                  icon: Wrench,
+                  label: "APPROACH",
+                  color: "#3b82f6",
+                  text: caseStudy.caseStudy.approach,
+                },
+                {
+                  icon: TrendingUp,
+                  label: "RESULTS",
+                  color: "#22c55e",
+                  text: caseStudy.caseStudy.results,
+                },
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} style={{ marginBottom: idx < 2 ? 22 : 0 }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        marginBottom: 10,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 30,
+                          height: 30,
+                          borderRadius: 8,
+                          background: `${item.color}14`,
+                          border: `1px solid ${item.color}33`,
+                          display: "grid",
+                          placeItems: "center",
+                        }}
+                      >
+                        <Icon size={14} color={item.color} />
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: FONT_MONO,
+                          fontSize: 11,
+                          color: item.color,
+                          fontWeight: 700,
+                          letterSpacing: "0.08em",
+                        }}
+                      >
+                        {item.label}
+                      </span>
+                    </div>
+                    <p
+                      style={{
+                        color: C.textMuted,
+                        fontSize: 13.5,
+                        lineHeight: 1.7,
+                        margin: 0,
+                        paddingLeft: 38,
+                      }}
+                    >
+                      {item.text}
+                    </p>
+                  </div>
+                );
+              })}
+
+              {/* Tech used */}
+              <div
+                style={{
+                  marginTop: 22,
+                  paddingLeft: 38,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 6,
+                }}
+              >
+                {caseStudy.tech.map((t) => (
+                  <span
+                    key={t}
+                    style={{
+                      fontFamily: FONT_MONO,
+                      fontSize: 11,
+                      background: `${C.accent}12`,
+                      border: `1px solid ${C.accent}30`,
+                      color: C.accent,
+                      padding: "3px 10px",
+                      borderRadius: 5,
+                      fontWeight: 600,
+                    }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }

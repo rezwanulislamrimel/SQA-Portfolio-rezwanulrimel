@@ -10,6 +10,9 @@ import {
   ArrowRight,
   Layers,
   ChevronRight,
+  DollarSign,
+  Clock,
+  Zap,
 } from "lucide-react";
 import { C, FONT_SANS, FONT_HEAD, FONT_MONO } from "../../constants/theme";
 
@@ -31,6 +34,11 @@ const SERVICES = [
     ],
     tech: ["Jira", "TestRail", "Confluence", "Zephyr", "Excel"],
     deliverables: "Test plans, test cases, bug reports, traceability matrix",
+    pricing: {
+      hourly: "$12",
+      project: "From $150",
+      timeline: "3–7 days",
+    },
     color: "#22c55e",
   },
   {
@@ -50,6 +58,11 @@ const SERVICES = [
     ],
     tech: ["Playwright", "Selenium", "Python", "GitHub Actions", "Allure"],
     deliverables: "Automation framework, CI pipeline config, test reports",
+    pricing: {
+      hourly: "$18",
+      project: "From $300",
+      timeline: "1–2 weeks",
+    },
     color: "#3b82f6",
   },
   {
@@ -69,6 +82,11 @@ const SERVICES = [
     ],
     tech: ["Postman", "Newman", "REST Assured", "Swagger", "cURL"],
     deliverables: "Postman collections, Newman reports, API test coverage docs",
+    pricing: {
+      hourly: "$15",
+      project: "From $200",
+      timeline: "3–5 days",
+    },
     color: "#f59e0b",
   },
   {
@@ -88,6 +106,11 @@ const SERVICES = [
     ],
     tech: ["K6", "JMeter", "Grafana", "InfluxDB", "Locust"],
     deliverables: "Performance test scripts, benchmark reports, recommendations",
+    pricing: {
+      hourly: "$20",
+      project: "From $350",
+      timeline: "1–2 weeks",
+    },
     color: "#ec4899",
   },
   {
@@ -107,6 +130,11 @@ const SERVICES = [
     ],
     tech: ["OWASP ZAP", "Burp Suite", "Nmap", "SQLMap", "Nikto"],
     deliverables: "Vulnerability reports, risk ratings, remediation guides",
+    pricing: {
+      hourly: "$22",
+      project: "From $400",
+      timeline: "1–2 weeks",
+    },
     color: "#ef4444",
   },
   {
@@ -126,6 +154,11 @@ const SERVICES = [
     ],
     tech: ["Appium", "Android Studio", "XCUITest", "BrowserStack", "Xcode"],
     deliverables: "Mobile test scripts, device matrix reports, compatibility docs",
+    pricing: {
+      hourly: "$20",
+      project: "From $350",
+      timeline: "1–2 weeks",
+    },
     color: "#8b5cf6",
   },
 ];
@@ -192,12 +225,12 @@ export function ServicesSection() {
             color: C.textMuted,
             fontSize: 15,
             marginTop: 10,
-            maxWidth: 480,
+            maxWidth: 540,
             lineHeight: 1.65,
           }}
         >
           End-to-end quality assurance services — from exploratory testing to
-          full automation pipelines.
+          full automation pipelines. Transparent pricing, no hidden fees.
         </p>
       </div>
 
@@ -303,16 +336,38 @@ export function ServicesSection() {
                   </div>
                   <div
                     style={{
-                      fontSize: 11.5,
-                      color: C.textFaint,
-                      fontFamily: FONT_MONO,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
                       marginTop: 2,
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
                     }}
                   >
-                    {svc.subtitle}
+                    <span
+                      style={{
+                        fontSize: 11.5,
+                        color: C.textFaint,
+                        fontFamily: FONT_MONO,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {svc.subtitle}
+                    </span>
+                    {/* price tag in list */}
+                    <span
+                      style={{
+                        fontSize: 10.5,
+                        fontWeight: 700,
+                        color: isActive ? svc.color : C.textFaint,
+                        fontFamily: FONT_MONO,
+                        whiteSpace: "nowrap",
+                        marginLeft: "auto",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {svc.pricing.hourly}/hr
+                    </span>
                   </div>
                 </div>
 
@@ -365,7 +420,7 @@ export function ServicesSection() {
               >
                 <ActiveIcon size={24} color={active.color} />
               </div>
-              <div>
+              <div style={{ flex: 1 }}>
                 <h3
                   style={{
                     fontFamily: FONT_HEAD,
@@ -401,6 +456,195 @@ export function ServicesSection() {
             >
               {active.description}
             </p>
+          </div>
+
+          {/* ── Pricing Card ── */}
+          <div
+            style={{
+              margin: "20px 28px 0",
+              background: `linear-gradient(135deg, ${active.color}0a 0%, rgba(255,255,255,0.02) 100%)`,
+              border: `1px solid ${active.color}30`,
+              borderRadius: 12,
+              padding: "18px 20px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                marginBottom: 14,
+              }}
+            >
+              <DollarSign size={13} color={active.color} />
+              <span
+                style={{
+                  fontFamily: FONT_MONO,
+                  fontSize: 11,
+                  color: active.color,
+                  letterSpacing: "0.1em",
+                  fontWeight: 700,
+                }}
+              >
+                PRICING
+              </span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr 1fr",
+                gap: 12,
+              }}
+              className="pricing-grid"
+            >
+              {/* Hourly */}
+              <div
+                style={{
+                  background: "rgba(255,255,255,0.025)",
+                  border: `1px solid ${C.border}`,
+                  borderRadius: 10,
+                  padding: "12px 14px",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 10,
+                    color: C.textFaint,
+                    fontFamily: FONT_MONO,
+                    letterSpacing: "0.08em",
+                    marginBottom: 6,
+                  }}
+                >
+                  HOURLY
+                </div>
+                <div
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 800,
+                    fontFamily: FONT_HEAD,
+                    color: "#fff",
+                    lineHeight: 1,
+                  }}
+                >
+                  {active.pricing.hourly}
+                </div>
+                <div
+                  style={{
+                    fontSize: 10.5,
+                    color: C.textFaint,
+                    marginTop: 3,
+                  }}
+                >
+                  per hour
+                </div>
+              </div>
+
+              {/* Project */}
+              <div
+                style={{
+                  background: `${active.color}0a`,
+                  border: `1px solid ${active.color}30`,
+                  borderRadius: 10,
+                  padding: "12px 14px",
+                  textAlign: "center",
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: -8,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    background: active.color,
+                    color: "#050505",
+                    fontSize: 9,
+                    fontWeight: 800,
+                    fontFamily: FONT_MONO,
+                    padding: "2px 8px",
+                    borderRadius: 4,
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  POPULAR
+                </div>
+                <div
+                  style={{
+                    fontSize: 10,
+                    color: C.textFaint,
+                    fontFamily: FONT_MONO,
+                    letterSpacing: "0.08em",
+                    marginBottom: 6,
+                  }}
+                >
+                  PROJECT
+                </div>
+                <div
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 800,
+                    fontFamily: FONT_HEAD,
+                    color: active.color,
+                    lineHeight: 1,
+                  }}
+                >
+                  {active.pricing.project.replace("From ", "")}
+                </div>
+                <div
+                  style={{
+                    fontSize: 10.5,
+                    color: C.textFaint,
+                    marginTop: 3,
+                  }}
+                >
+                  starting from
+                </div>
+              </div>
+
+              {/* Timeline */}
+              <div
+                style={{
+                  background: "rgba(255,255,255,0.025)",
+                  border: `1px solid ${C.border}`,
+                  borderRadius: 10,
+                  padding: "12px 14px",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 10,
+                    color: C.textFaint,
+                    fontFamily: FONT_MONO,
+                    letterSpacing: "0.08em",
+                    marginBottom: 6,
+                  }}
+                >
+                  TIMELINE
+                </div>
+                <div
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 800,
+                    fontFamily: FONT_HEAD,
+                    color: "#fff",
+                    lineHeight: 1,
+                  }}
+                >
+                  {active.pricing.timeline}
+                </div>
+                <div
+                  style={{
+                    fontSize: 10.5,
+                    color: C.textFaint,
+                    marginTop: 3,
+                  }}
+                >
+                  avg. delivery
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* capabilities */}
@@ -523,6 +767,38 @@ export function ServicesSection() {
                 </span>
               </div>
             </div>
+
+            {/* Get a quote CTA */}
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("contact");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="cta-primary"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                marginTop: 20,
+                padding: "12px 0",
+                borderRadius: 10,
+                background: active.color,
+                color: "#050505",
+                textDecoration: "none",
+                fontSize: 13.5,
+                fontWeight: 700,
+                fontFamily: FONT_SANS,
+                border: 0,
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <Zap size={15} strokeWidth={2.5} />
+              Get a Quote
+            </a>
           </div>
         </div>
       </div>
@@ -532,6 +808,7 @@ export function ServicesSection() {
         @media (max-width: 860px) {
           .services-grid { grid-template-columns: 1fr !important; }
           .caps-grid { grid-template-columns: 1fr !important; }
+          .pricing-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
