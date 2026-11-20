@@ -90,11 +90,20 @@ export function BugDefenseSection() {
         scrollMarginTop: 64,
       }}
     >
-      <SectionTag>// client-trust.defect-prevention</SectionTag>
+      {/* Eyebrow */}
+      <div style={{
+        display: "inline-flex", alignItems: "center", gap: 8,
+        background: C.accentDim || C.passDim, border: `1px solid ${C.borderHi}`,
+        borderRadius: 20, padding: "5px 14px", fontSize: 11, fontFamily: FONT_MONO,
+        color: C.accent || C.pass, marginBottom: 16, textTransform: "uppercase",
+        letterSpacing: 1.5, fontWeight: 600,
+      }}>
+        🛡️ QA DEFENSE
+      </div>
 
       <div style={{ maxWidth: 760, marginBottom: 44 }}>
         <h2 style={{ fontSize: "clamp(1.9rem, 3.2vw, 2.5rem)", fontWeight: 800, lineHeight: 1.2, marginBottom: 14 }}>
-          How I protect your software from costly bugs
+          Quality <span style={{ color: C.accent || C.pass }}>Defense</span> System
         </h2>
         <p style={{ fontSize: 15.5, color: C.textMuted, lineHeight: 1.7, margin: 0 }}>
           A single checkout glitch or broken flow damages customer trust and costs real revenue. Here is my 4-pillar quality defense system that ensures your product launches safely.

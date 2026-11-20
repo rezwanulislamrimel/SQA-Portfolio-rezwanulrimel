@@ -1,21 +1,25 @@
 /* ═══════════════════════════════════════════
-   DESIGN TOKENS — High Contrast SQA Palette
-   Optimized for crystal-clear readability & contrast
+   DESIGN TOKENS — Ultra-Modern Dark Portfolio
+   Emerald green accent, pure black base
 ═══════════════════════════════════════════ */
 export const C = {
-  bg:          "#0B132B",   // Deep Midnight Navy base
-  surface:     "rgba(28, 37, 65, 0.88)",   // Opaque navy cards with backdrop blur
-  surfaceAlt:  "rgba(35, 44, 77, 0.94)",
-  border:      "rgba(255, 255, 255, 0.10)", // Clean crisp borders
-  borderHi:    "rgba(0, 245, 212, 0.35)",
-  textMain:    "#FFFFFF",   // Pure Bright White — 100% sharp headings
-  textMuted:   "#D1D5DB",   // Bright Slate/Gray-300 — high readability body text
-  textFaint:   "#9CA3AF",   // Clear Slate/Gray-400 — legible metadata & tags
-  pass:        "#00F5D4",   // Electric Cyan/Cyber Mint — CTA & pass states
-  passDim:     "rgba(0, 245, 212, 0.14)",
-  warn:        "#38BDF8",   // Sky Blue secondary accent
+  bg:          "#050505",
+  surface:     "rgba(12, 12, 12, 0.88)",
+  surfaceAlt:  "rgba(22, 22, 22, 0.94)",
+  border:      "rgba(255, 255, 255, 0.08)",
+  borderHi:    "rgba(34, 197, 94, 0.35)",
+  textMain:    "#FFFFFF",
+  textMuted:   "#9CA3AF",
+  textFaint:   "#6B7280",
+  accent:      "#22c55e",
+  accentDim:   "rgba(34, 197, 94, 0.14)",
+  accentDark:  "#16a34a",
+  // Backwards compat aliases
+  pass:        "#22c55e",
+  passDim:     "rgba(34, 197, 94, 0.14)",
+  warn:        "#38BDF8",
   warnDim:     "rgba(56, 189, 248, 0.14)",
-  fail:        "#FF6B6B",   // Bug / Defect accent
+  fail:        "#FF6B6B",
   failDim:     "rgba(255, 107, 107, 0.14)",
   info:        "#38BDF8",
   infoDim:     "rgba(56, 189, 248, 0.14)",
