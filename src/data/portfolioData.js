@@ -9,7 +9,7 @@ export const PERSONAL_INFO = {
   linkedin: "https://linkedin.com/in/rezwanulrimel",
   github: "https://github.com/rezwanulislamrimel",
   cvLink: "./cv/rezwanul_rimel_cv.pdf",
-  education: "B.Sc. in Computer Science & Engineering — AIICT, 2020",
+  education: "B.Sc. in Computer Science & Engineering — Ahsanullah Institute of Information and Communication Technology (AIICT), 2020",
 };
 
 export const CERTIFICATIONS = [

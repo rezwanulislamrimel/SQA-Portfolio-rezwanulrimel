@@ -7,7 +7,7 @@ const EDUCATION_AND_CERTS = [
   {
     type: "degree",
     name: "B.Sc. in Computer Science & Engineering",
-    institution: "AIICT (Asian Institute of Information Technology)",
+    institution: "Ahsanullah Institute of Information and Communication Technology (AIICT)",
     detail: "Core foundations in Software Engineering, Algorithms, Database Systems & Object-Oriented Design.",
     meta: "Graduated · 2020",
     badgeText: "ACADEMIC DEGREE",
