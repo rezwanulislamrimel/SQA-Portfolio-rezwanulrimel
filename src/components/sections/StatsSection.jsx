@@ -40,20 +40,20 @@ const STATS = [
     color: "#f59e0b", // amber
   },
   {
-    value: 200,
+    value: 1500,
     suffix: "+",
-    label: "Test Cases Written",
-    subtext: "Functional, boundary, security & regression",
-    tag: "HIGH COVERAGE",
+    label: "Test Cases Executed",
+    subtext: "Manual, automated, API & edge-case coverage",
+    tag: "HIGH TEST COVERAGE",
     icon: FileCheck2,
     color: "#8b5cf6", // purple
   },
   {
-    value: 50,
+    value: 280,
     suffix: "+",
-    label: "Bugs Caught",
-    subtext: "Prevented before production release",
-    tag: "ZERO REGRESSIONS",
+    label: "Bugs Caught & Documented",
+    subtext: "Critical, high-severity & UI/API edge defects",
+    tag: "PRE-RELEASE DEFENSE",
     icon: Bug,
     color: "#ef4444", // rose/red
   },
@@ -100,7 +100,7 @@ function AnimatedNumber({ target, suffix, duration = 1800 }) {
 
   return (
     <span ref={ref}>
-      {count}
+      {count.toLocaleString()}
       {suffix}
     </span>
   );
