@@ -9,6 +9,7 @@ import { ProfileSidebar, NavDock } from "../components/layout";
 import {
   HeroSection,
   BugDefenseSection,
+  ServicesSection,
   ExperienceSection,
   ProjectsSection,
   SkillsSection,
@@ -201,6 +202,7 @@ export default function HomePage() {
         <SQABackground />
         <HeroSection />
         <BugDefenseSection />
+        <ServicesSection />
         <ExperienceSection />
         <ProjectsSection />
         <SkillsSection />

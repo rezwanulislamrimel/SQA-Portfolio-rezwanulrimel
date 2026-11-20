@@ -11,6 +11,11 @@ export function Navbar({ goto, lang, setLang }) {
   const location = useLocation();
   const isBlogPage = location.pathname === "/blog";
 
+  // On blog page, hide the "bug-defense" / "QA Defense" nav item
+  const displayNav = isBlogPage
+    ? NAV.filter((n) => n.id !== "bug-defense")
+    : NAV;
+
   const [hireOpen, setHireOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -101,7 +106,7 @@ export function Navbar({ goto, lang, setLang }) {
 
         {/* Desktop Navigation */}
         <nav className="nav-links" style={{ display: "flex", gap: 20, alignItems: "center" }}>
-          {NAV.map((n) => {
+          {displayNav.map((n) => {
             const isBlogActive = isBlogPage && n.id === "blog";
             return (
               <button
@@ -291,7 +296,7 @@ export function Navbar({ goto, lang, setLang }) {
             padding: "8px 24px 18px",
           }}
         >
-          {NAV.map((n) => {
+          {displayNav.map((n) => {
             const isBlogActive = isBlogPage && n.id === "blog";
             return (
               <button

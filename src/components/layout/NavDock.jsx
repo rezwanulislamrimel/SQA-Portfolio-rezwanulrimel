@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Home, Shield, Briefcase, FolderGit2, Code2, BookOpen, Mail } from "lucide-react";
+import { Home, Shield, Layers, Briefcase, FolderGit2, Code2, BookOpen, Mail } from "lucide-react";
 import { C } from "../../constants/theme";
 
 const sections = [
   { id: "home", icon: Home, label: "Home" },
   { id: "bug-defense", icon: Shield, label: "QA Defense" },
+  { id: "services", icon: Layers, label: "Services" },
   { id: "experience", icon: Briefcase, label: "Experience" },
   { id: "projects", icon: FolderGit2, label: "Projects" },
   { id: "skills", icon: Code2, label: "Skills" },
